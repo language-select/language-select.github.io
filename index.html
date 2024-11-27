@@ -4,42 +4,48 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <!-- <script src="https://flagmeister.github.io/elements.flagmeister.min.js"></script> -->
-    <script src="https://toast-message.github.io/element.js"></script>
-    <!-- <script src="language-select.min.js"></script> -->
     <script src="button.min.js"></script>
-    <!-- <script src="flags.js"></script> -->
     <title>Language Selector Modal</title>
+    <style>
+        /* STYLE <language-select> Web Component */
+        language-select {
+            --color: darkgreen;
+            --padding: 1em;
+            zoom: 2;
+            position: absolute;
+            top: var(--padding);
+            right: var(--padding);
+            float: right;
+            background: whitesmoke;
+        }
+
+        language-select::part(div) {
+            /* background: pink */
+        }
+
+        language-select::part(path) {
+            fill: var(--color);
+        }
+
+        language-select::part(label) {
+            /* label */
+            /* font-size: 1em;  */
+            /* font-weight: bold; */
+            color: var(--color);
+        }
+    </style>
     <style>
         body {
             font: 21px Arial;
         }
 
+        /* PAGE STYLING */
         section {
             background: beige;
             margin: 0 auto;
             max-width: 1024px;
             padding: 1em;
             position: relative;
-        }
-
-        language-select {
-            position: absolute;
-            top: 1em;
-            right: 1em;
-            float: right;
-            background: whitesmoke;
-        }
-
-        /* language-select::part(path) {
-            fill: teal;
-        } */
-
-        language-select::part(label) {
-            /* label */
-            font-size: 1.5em;
-            font-weight: bold;
-            /* color: teal; */
         }
 
         code {
@@ -50,9 +56,17 @@
 
 <body>
     <section>
-        <h1>&lt;language-select> - Proof of Concept</h1>
+
         <language-select languages="nl,de,fr,gb,jp,es,it" selected="nl"
             caption="Select your preferred language"></language-select>
+<h1>&lt;language-select> - Proof of Concept</h1>
+<p>The Web Component displays the button in the top rigth (or whereever)</b></p>
+<p>That means dependencies are only every loaded when required.</p>
+<p>Loading UI and SVG Flags Web Components dependencies only <b>AFTER</b> click</p>
+<p>Delay/performance measured in console. Is it an acceptable delay</p>
+<p>Additional Web Components are removed from the DOM again, but definition remains in memory so dependencies
+    are loaded <b>once</b></p>
+<h2>Use</h2>
         <p>Load
             with<code><pre>&lt;script src="https://language-select.github.io/button.min.js">&lt;/script></pre></code>
         </p>
@@ -61,11 +75,7 @@
         </p>
         <p>Language codes are ISO-Alpha3 country codes</p>
         <p>Style with ::part (see Page Source)</p>
-        <p>Minimal UI is loaded</p>
-        <p>Loading UI and SVG Flags dependencies only AFTER click (performance measured in console)</p>
-        <p>Language selection sends a <b>language-selected</b> Event up the DOM tree (see console)</p>
-        <p>Additional Web Components are removed from the DOM again, but definition remains in memory so dependencies
-            are load <b>once</b></p>
+        <p>Language selection sends a <b>"language-select"</b> Event up the DOM tree (see console)</p>
     </section>
     <section hidden>
         <language-select options languges="nl,de,fr,gb,jp,es,it" selected="de"
