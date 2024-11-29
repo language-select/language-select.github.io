@@ -12,9 +12,10 @@
     // fetch,
     // URLSearchParams,
     // navigator,
-    // setTimeout,
     // CustomEvent,
-    // console,
+    // setTimeout,
+    performance,
+    console,
     Promise,
     customElements,
     document,
@@ -38,7 +39,7 @@
   // this reduces the amount of code loaded initially
   // but does cause a acceptable? delay when the button is clicked
 
-  // lshost:this is passed to other/loaded components as property
+  // host:this is passed to other/loaded components as property
 
   // Web Component name, and derived strings
   const _LANGUAGE_SELECT_ = "language-select";
@@ -192,7 +193,7 @@
           this.onclick = () => {
             // ------------------------------------------------------------------ inject Web Component
             let selectorFlags = createElement(_WC_SELECT_FLAGS_, {
-              lshost: this, // pass this component as lshost reference
+              host: this, // pass this component as host reference
             });
             // pass attributes  to <selected-language-flag>
             ["selected", "languages", "caption"].map((attr) => {
@@ -219,7 +220,7 @@
                 .then(() =>
                   // the <language-select-flags> Web Component is (undefined) in the DOM
                   // will automagically upgrade, so nothing to do here
-                  console.warn(
+                  console["warn"](
                     _WC_SELECT_FLAGS_,
                     `load: ${~~performance.measure(_WC_SELECT_FLAGS_)
                       .duration}ms`

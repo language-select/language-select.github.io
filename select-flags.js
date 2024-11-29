@@ -254,12 +254,16 @@
                 part: "title",
                 textContent:
                   this.getAttribute("caption") || "Select Your Language",
-                onclick: () => this.dialog.close(),
+                onclick: () =>
+                  this.$emit({
+                    type: _EVENT_REMOVE_,
+                    scope: this,
+                  }),
               }),
               (this.ALLSELECTORS = createElement(
                 _WC._LANGUAGE_SELECTORS_.name,
                 {
-                  lshost: this.lshost,
+                  host: this.host,
                 }
               )),
             ],
@@ -301,9 +305,9 @@
             });
 
             // set the selected language on original <language-select>
-            if (this.lshost) {
-              this.lshost.label.textContent = detail.language;
-              this.lshost.setAttribute("selected", detail.iso);
+            if (this.host) {
+              this.host.label.textContent = detail.language;
+              this.host.setAttribute("selected", detail.iso);
             }
 
             // Do not close the dialog, remove the whole <language-select-flags> element
@@ -317,7 +321,19 @@
         this.$listen({
           type: _EVENT_REMOVE_,
           func: () => {
-            this.remove();
+            console.log(
+              `%c (document) Event: ${_EVENT_REMOVE_} `,
+              "background:gold",
+              this.dialog
+            );
+            this.dialog.style.animation = "fadeOut .3s ease";
+
+            // aninmationend not always triggered??
+            // this.dialog.onanimationend = () => {
+            //   this.remove();
+            // };
+            // removing the dialog ourselves
+            setTimeout(() => this.remove(), 300);
           },
         });
         // ---------------------------------------------------------------------- showModal immediaty
@@ -327,10 +343,10 @@
       showModal() {
         // take "selected" attribute from <language-select> and set it on <language-selectors>
         // this will set the selected flag order to:1
-        this.ALLSELECTORS.setAttribute(
-          _ATTR_SELECTED_,
-          this.getAttribute("selected")
-        );
+        let ISO = this.getAttribute("selected");
+        if (ISO == "en") ISO = "gb"; // US,GB will trigger flag-duo flag
+        // set selected flag
+        this.ALLSELECTORS.setAttribute(_ATTR_SELECTED_, ISO);
         if (this.dialog.showModal) this.dialog.showModal();
       } // showModal
       // ----------------------------------------------------------------------
@@ -343,9 +359,9 @@
     class extends BaseClassElement {
       [_WCCALLBACK_CONNECTEDDONE_]() {
         // -------------------------------------------------------------------- loop all flags
-        let LANGUAGES_ISO_CODES = Object.keys(this.lshost.languages);
+        let LANGUAGES_ISO_CODES = Object.keys(this.host.languages);
         let isocodes = LANGUAGES_ISO_CODES;
-        let languages = this.lshost.getAttribute("languages");
+        let languages = this.host.getAttribute("languages");
         let selectableLangs = languages?.split(",") || LANGUAGES_ISO_CODES;
 
         //* hardcode US,GB <flag is="duo"> so English is highlighted
@@ -355,6 +371,7 @@
         let allflags = isocodes
           //.slice(0, 5)
           .map((is) => {
+            // correct english languages to flag-duo flag
             if (is == "us" || is == "gb") {
               UIis = "duo";
             } else UIis = is;
@@ -363,7 +380,7 @@
             // ------------------------------------------------------------------ create element
             let flag = createElement(_WC_FLAG_LANGUAGE_, {
               is, // ISO alpha 3 language code
-              lshost: this.lshost,
+              host: this.host,
             });
             flag.classList.toggle(
               _ATTR_SELECTABLE_,
@@ -373,8 +390,12 @@
           });
         // -------------------------------------------------------------------- append style and flags
         this.attachShadow({ mode: "open" }).append(
-          createSTYLEElement(_WC._LANGUAGE_SELECTORS_.css),
-          createSTYLEElement(styleselect), // one CSS selector for every ISO code
+          createSTYLEElement(_WC._LANGUAGE_SELECTORS_.css, {
+            id: _WC._LANGUAGE_SELECTORS_.name,
+          }),
+          createSTYLEElement(styleselect, {
+            id: _WC._LANGUAGE_SELECTORS_.name + "-selected",
+          }), // one CSS selector for every ISO code
           ...allflags
         ); // append
         this.onclick = () => {
@@ -395,7 +416,7 @@
       [_WCCALLBACK_CONNECTEDDONE_]() {
         let is = this.is || "en"; // default to English
         if (is == "us" || is == "gb") is = "duo"; // create <flag-duo> for US,GB
-        let language = this.lshost.languages[is] || "English";
+        let language = this.host.languages[is] || "English";
         let img; // declare img to keep lets together
         // --------------------------------------------------------------------
         this.attachShadow({ mode: "open" }).append(
@@ -405,7 +426,7 @@
             part: "flag",
             alt: language,
             detail: 9999,
-            lshost: this.lshost,
+            host: this.host,
           })),
           createElement("div", { part: "label", textContent: language })
         );
