@@ -43,6 +43,7 @@
 
         /* PAGE STYLING */
         section {
+            display: none;
             background: beige;
             margin: 0 auto;
             max-width: 1024px;
@@ -57,14 +58,11 @@
 </head>
 
 <body>
+    <!-- USE Web Component -->
+    <language-select languages="nl,de,fr,gb,jp,es,it" selected="gb"
+        caption="Select your preferred language"></language-select>
+
     <section>
-
-        <!-- USE Web Component -->
-        <language-select languages="nl,de,fr,gb,jp,es,it" selected="gb"
-            caption="Select your preferred language"></language-select>
-
-
-
         <br>
         <br>
         <a
