@@ -4,13 +4,16 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <script src="button.min.js"></script>
     <title>Language Selector Modal</title>
+
+    <!-- LOADING <language-select> Web Component -->
+    <script src="button.min.js"></script>
+
     <style>
         /* STYLE <language-select> Web Component */
         language-select {
-            --color: darkgreen;
-            --padding: 1em;
+            --buttoncolor: darkgreen;
+            --padding: .5vw;
             zoom: 2;
             position: absolute;
             top: var(--padding);
@@ -24,14 +27,13 @@
         }
 
         language-select::part(path) {
-            fill: var(--color);
+            fill: var(--buttoncolor);
         }
 
         language-select::part(label) {
-            /* label */
-            /* font-size: 1em;  */
+            /* font-size: 1.1em;  */
             /* font-weight: bold; */
-            color: var(--color);
+            color: var(--buttoncolor);
         }
     </style>
     <style>
@@ -57,25 +59,30 @@
 <body>
     <section>
 
+        <!-- USE Web Component -->
         <language-select languages="nl,de,fr,gb,jp,es,it" selected="gb"
             caption="Select your preferred language"></language-select>
 
+
+
+        <br>
+        <br>
         <a
             href="https://github.com/language-select/language-select.github.io">https://github.com/language-select/language-select.github.io</a>
 
         <h1>&lt;language-select> - Proof of Concept</h1>
-        <p>The Web Component displays the button in the top rigth (or whereever)</b></p>
-        <p>Loading UI and SVG Flags Web Components dependencies only <b>AFTER</b> click</p>
-        <p>That means dependencies are only ever loaded when required.</p>
-        <p>Delay/performance measured in console. Is it an acceptable delay</p>
-        <p>Additional Web Components are removed from the DOM again, but definition remains in memory so dependencies
-            are loaded <b>once</b></p>
+        <p>For usage and styling see <a href="view-source:https://language-select.github.io/">page source</a></p>
+        <p>The Web Component displays a button with language-name text label</b></p>
+        <p>UI and SVG Flags dependencies only load <b>AFTER</b> click, only when required, once!
+            <br>
+            This LOAD delay is measured in the console. Is it an acceptable UI delay?
+        </p>
         <h2>Use</h2>
         <p>Load
-            with<code><pre>&lt;script src="https://language-select.github.io/button.min.js">&lt;/script></pre></code>
+            with<br><code>&lt;script src="https://language-select.github.io/button.min.js">&lt;/script></code>
         </p>
-        <p>Use:
-            <code><pre>&lt;language-select selected="nl" languages="en,nl,es,pt,..."&lt;/language-select></pre></code>
+        <p>Use:<br>
+            <code>&lt;language-select selected="nl" languages="en,nl,es,pt,...">&lt;/language-select></code>
         </p>
         <p>Language codes are ISO-Alpha3 country codes</p>
         <p>Style with ::part (see Page Source)</p>
