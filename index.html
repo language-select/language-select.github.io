@@ -38,12 +38,11 @@
     </style>
     <style>
         body {
-            font: 21px Arial;
+            font-family: Arial;
         }
 
         /* PAGE STYLING */
         section {
-            display: none;
             background: beige;
             margin: 0 auto;
             max-width: 1024px;
@@ -58,15 +57,15 @@
 </head>
 
 <body>
-    <!-- USE Web Component -->
-    <language-select languages="nl,de,fr,gb,jp,es,it" selected="gb"
-        caption="Select your preferred language"></language-select>
-
     <section>
+
+        <!-- USE Web Component -->
+        <language-select languages="nl,de,fr,gb,jp,es,it" selected="gb"
+            caption="Select your preferred language"></language-select>
+
         <br>
         <br>
-        <a
-            href="https://github.com/language-select/language-select.github.io">https://github.com/language-select/language-select.github.io</a>
+        <a href="https://github.com/language-select/language-select.github.io">GitHub repo</a>
 
         <h1>&lt;language-select> - Proof of Concept</h1>
         <p>For usage and styling see <a href="view-source:https://language-select.github.io/">page source</a></p>
