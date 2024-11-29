@@ -323,11 +323,6 @@
         this.$listen({
           type: _EVENT_REMOVE_,
           func: () => {
-            console.log(
-              `%c (document) Event: ${_EVENT_REMOVE_} `,
-              "background:gold",
-              this.dialog
-            );
             this.dialog.style.animation = "fadeOut .3s ease";
 
             // aninmationend not always triggered??
