@@ -165,12 +165,10 @@
         // selected language set in CSS selector maker for each flag below
         //`.selected{background:var(--selectcolor)}` +
         // flag
-        //`[part="flag"]{transition:transform 0.2s;display:block;width:100%;aspect-ratio:4/3}` +
-        "img{max-width:100%;aspect-ratio:4/3}" +
+        // `[part="flag"]{transition:transform 0.2s;display:block;width:100%;aspect-ratio:4/3}` +
+        //"img{max-width:100%;aspect-ratio:4/3}" +
         part("label") + // center label below flag
-        `{font-size:var(--select-language-font-size,16px);text-align:center}` +
-        //`{width:100%;display:flex;align-items:center;justify-content:center;height:100%;white-space:no-wrap}` +
-
+        `{font-size:var(--select-language-font-size,16px);text-align:center;min-width:80px}` +
         // shadow needs work
         // part("flag") +
         // `{box-shadow:0 1px 1px rgba(0, 0, 0, 0.9)}` +
@@ -308,7 +306,7 @@
 
             // set the selected language on original <language-select>
             if (this.host) {
-              this.host.label.textContent = detail.language;
+              this.host.label(detail.iso);
               this.host.setAttribute("selected", detail.iso);
             }
 
@@ -340,8 +338,7 @@
       showModal() {
         // take "selected" attribute from <language-select> and set it on <language-selectors>
         // this will set the selected flag order to:1
-        let ISO = this.getAttribute("selected");
-        if (ISO == "en") ISO = "gb"; // US,GB will trigger flag-duo flag
+        const ISO = this.getAttribute("selected");
         // set selected flag
         this.ALLSELECTORS.setAttribute(_ATTR_SELECTED_, ISO);
         if (this.dialog.showModal) this.dialog.showModal();
@@ -362,16 +359,13 @@
         let selectableLangs = languages?.split(",") || LANGUAGES_ISO_CODES;
 
         //* hardcode US,GB <flag is="duo"> so English is highlighted
-        let styleselect = _WC._LANGUAGE_SELECTORS_.selected("gb", "duo");
+        let styleselect = _WC._LANGUAGE_SELECTORS_.selected("en", "duo");
 
-        let UIis;
         let allflags = isocodes
           //.slice(0, 5)
           .map((is) => {
             // correct english languages to flag-duo flag
-            if (is == "us" || is == "gb") {
-              UIis = "duo";
-            } else UIis = is;
+            const UIis = is == "en" ? "duo" : is;
             // ---------------------------------------------------------------- create CSS style selector for each
             styleselect += _WC._LANGUAGE_SELECTORS_.selected(UIis); // set selected flag
             // ------------------------------------------------------------------ create element
@@ -412,7 +406,7 @@
     class extends BaseClassElement {
       [_WCCALLBACK_CONNECTEDDONE_]() {
         let is = this.is || "en"; // default to English
-        if (is == "us" || is == "gb") is = "duo"; // create <flag-duo> for US,GB
+        if (is == "en") is = "duo"; // create <flag-duo> for US,GB
         let language = this.host.languages[is] || "English";
         let img; // declare img to keep lets together
         // --------------------------------------------------------------------
