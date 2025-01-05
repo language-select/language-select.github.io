@@ -31,7 +31,6 @@
   // ========================================================================== String substitutions
   // -------------------------------------------- JavaScript substitutions for more unreadable code
   const [
-    _APPEND_,
     _DEFINE_,
     _ATTACHSHADOW_,
     _SHADOWROOT_,
@@ -44,7 +43,7 @@
     _ONCLICK_,
     _ATTR_PART_,
   ] = (
-    "append,define,attachShadow,shadowRoot,innerHTML,getAttribute,setAttribute,querySelector" +
+    "define,attachShadow,shadowRoot,innerHTML,getAttribute,setAttribute,querySelector" +
     ",addEventListener,removeEventListener,onclick,part"
   ).split(",");
   // ============================================================================ Helper Functions
@@ -279,10 +278,9 @@
           })) // <dialog>
         ); // append
         // -------------------------------------------------------------------- <dialog> animation
-        let dialog = this.dialog;
-        dialog.onanimationend = () => {
-          dialog.style.opacity = "1";
-          dialog.style.transform = "scale(1)";
+        this.dialog.onanimationend = () => {
+          this.dialog.style.opacity = "1";
+          this.dialog.style.transform = "scale(1)";
         };
 
         // -------------------------------------------------------------------- <language-select> listen for language-selected
@@ -313,21 +311,18 @@
             //dialog.close();
             this.$emit({
               type: _EVENT_REMOVE_,
-              scope: this,
+              //scope: this,
             });
           }, // func
         }); // listen
         this.$listen({
           type: _EVENT_REMOVE_,
           func: () => {
-            this.dialog.style.animation = "fadeOut .3s ease";
-
-            // aninmationend not always triggered??
-            // this.dialog.onanimationend = () => {
-            //   this.remove();
-            // };
-            // removing the dialog ourselves
-            setTimeout(() => this.remove(), 300);
+            this.dialog.onanimationend = () => {
+              this.dialog.close();
+              this.remove();
+            };
+            this.dialog.style.animation = "fadeOut .5s ease";
           },
         });
         // ---------------------------------------------------------------------- showModal immediaty
