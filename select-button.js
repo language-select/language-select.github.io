@@ -72,6 +72,15 @@
     `[part="path"]{fill:currentColor}` + // let user color: style icon
     "";
 
+  const createElement = (
+    tag,
+    { append = [], style = {}, attrs = {}, ...props } = {},
+    element = document.createElement(tag) // create or use existing element
+  ) => {
+    element.append(...append);
+    return Object.assign(element, props);
+  };
+
   customElements.define(
     _LANGUAGE_SELECT_,
     class extends HTMLElement {
@@ -118,15 +127,6 @@
         };
         // ======================================================================
         // cool helper function to create elements with properties
-        const createElement = (
-          tag,
-          props = { append: [] },
-          element = document.createElement(tag)
-        ) => {
-          element.append(...append);
-          return Object.assign(element, props);
-        };
-        
         // ======================================================================
         // preset variable for if/then/else
         let elements;

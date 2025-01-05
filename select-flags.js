@@ -57,8 +57,8 @@
    */
   const createElement = (
     tag,
-    props = { append: [] },
-    element = document.createElement(tag)
+    { append = [], style = {}, attrs = {}, ...props } = {},
+    element = document.createElement(tag) // create or use existing element
   ) => {
     element.append(...append);
     return Object.assign(element, props);
