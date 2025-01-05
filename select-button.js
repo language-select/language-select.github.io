@@ -74,7 +74,7 @@
 
   customElements.define(
     _LANGUAGE_SELECT_,
-    class LS extends HTMLElement {
+    class extends HTMLElement {
       connectedCallback() {
         // ====================================================================== this.alllanguages
         this.languages = {
@@ -117,14 +117,16 @@
           et: "አማርኛ", // Amharic
         };
         // ======================================================================
-        const createElement = (tag, props = {}) => {
-          const element = document.createElement(tag);
-          if (props.append) {
-            element.append(...props.append);
-            delete props.append;
-          }
+        // cool helper function to create elements with properties
+        const createElement = (
+          tag,
+          props = { append: [] },
+          element = document.createElement(tag)
+        ) => {
+          element.append(...append);
           return Object.assign(element, props);
         };
+        
         // ======================================================================
         // preset variable for if/then/else
         let elements;
@@ -132,6 +134,7 @@
         let languages = this.getAttribute("languages")
           .replace("gb", "en")
           .replace("us", "en");
+
         languages = languages
           ? languages.split(",")
           : Object.keys(this.languages);
@@ -181,7 +184,7 @@
         } else {
           // -------------------------------------------------------------------- create SVG icon and label
 
-          //function to set the label and short iso code
+          //method to (re)set the label and short iso code
           this.label = (iso = "en") => {
             this.shadowRoot.querySelector("[part=labeliso]").textContent =
               iso.toUpperCase();

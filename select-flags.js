@@ -53,16 +53,15 @@
    *
    * @param {string} tag - The tag name of the element to create.
    * @param {Object} [props={}] - An object containing properties to set on the created element.
-   * @param {Array} [props.append] - An array of child nodes to append to the created element.
    * @returns {HTMLElement} The created HTML element with the specified properties.
    */
-  const createElement = (tag, props = {}) => {
-    let el = document.createElement(tag);
-    if (props.append) {
-      el.append(...props.append);
-      delete props.append;
-    }
-    return Object.assign(el, props);
+  const createElement = (
+    tag,
+    props = { append: [] },
+    element = document.createElement(tag)
+  ) => {
+    element.append(...append);
+    return Object.assign(element, props);
   };
   // -------------------------------------------------------------------------- createSTYLEElement
   /**

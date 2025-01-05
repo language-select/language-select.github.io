@@ -4,5 +4,5 @@
 ```html
 <script src="https://language-select.github.io/select-button.min.js">
 
-    <language-selected selected="jp" languages="nl,de,fr,it,gr,en"></language-select>
+<language-select selected="jp" languages="nl,de,fr,it,gr,en"></language-select>
 ```
