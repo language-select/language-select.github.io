@@ -8,7 +8,11 @@
     <meta name="description" content="A web component for selecting languages">
 
     <!-- LOADING <language-select> Web Component -->
-    <script src="select-button.min.js"></script>
+    <script>
+        const script = document.createElement('script');
+        script.src = `./select-button.${location.href.includes("127") ? "" : ".min"}js`;
+        document.head.append(script);
+    </script>
 
     <style>
         /* STYLE <language-select> Web Component */
