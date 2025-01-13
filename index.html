@@ -15,9 +15,9 @@
     </script>
     <script>
         document.addEventListener('language-select', (e) => {
-            console.log(` %c language-select Event`, "background:gold", e.detail);
-            let el = document.querySelector('language-select');
-            console.log(` %c languages on <language-select>`, "background:gold", el.languages);
+            // console.log(` %c language-select Event`, "background:gold", e.detail);
+            // let el = document.querySelector('language-select');
+            // console.log(` %c languages on <language-select>`, "background:gold", el.languages);
         });
         console.error(` %c language-select Event`, "background:gold", "Listen for 'language-select' Event");
     </script>
@@ -55,14 +55,15 @@
             }
         }
 
+        /* Show Language code instead of Language name */
         language-select {
             &::part(labeliso) {
-                display: inherit;
+                /* display: inherit; */
                 background: lightgrey;
             }
 
             &::part(labellanguage) {
-                display: none;
+                /* display: none; */
             }
         }
     </style>
