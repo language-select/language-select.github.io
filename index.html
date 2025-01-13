@@ -10,12 +10,22 @@
     <!-- LOADING <language-select> Web Component -->
     <script>
         const script = document.createElement('script');
-        script.src = `./select-button.${location.href.includes("127") ? "" : ".min"}js`;
+                    script.src = `./select-button${location.href.includes("127") ? "" : ".min"}.js`;
         document.head.append(script);
+    </script>
+    <script>
+        document.addEventListener('language-select', (e) => {
+            console.log(` %c language-select Event`, "background:gold", e.detail);
+            let el = document.querySelector('language-select');
+            console.log(` %c languages on <language-select>`, "background:gold", el.languages);
+        });
+        console.error(` %c language-select Event`, "background:gold", "Listen for 'language-select' Event");
     </script>
 
     <style>
+        /* ===================================== */
         /* STYLE <language-select> Web Component */
+        /* ===================================== */
         language-select {
             --buttoncolor: darkgreen;
             --padding: .5vw;
@@ -25,21 +35,49 @@
             right: var(--padding);
             float: right;
             background: whitesmoke;
+
+            /* style labeled parts inside shadowDOM */
+            &::part(div) {
+                /* background: pink */
+            }
+
+            &::part(path) {
+                /* style SVG icon */
+                fill: var(--buttoncolor);
+            }
+
+            &::part(labeliso),
+            &::part(labellanguage) {
+                /* style language label right of icon */
+                /* font-size: 1.1em;  */
+                /* font-weight: bold; */
+                color: var(--buttoncolor);
+            }
         }
 
-        language-select::part(div) {
-            /* background: pink */
-        }
+        language-select {
+            &::part(labeliso) {
+                display: inherit;
+                background: lightgrey;
+            }
 
-        language-select::part(path) {
-            fill: var(--buttoncolor);
+            &::part(labellanguage) {
+                display: none;
+            }
         }
-
-        language-select::part(labeliso),
-        language-select::part(labellanguage) {
-            /* font-size: 1.1em;  */
-            /* font-weight: bold; */
-            color: var(--buttoncolor);
+    </style>
+    <style>
+        /* =========================================== */
+        /* STYLE <language-select-flags> Web Component */
+        /* =========================================== */
+        language-select-flags {
+            --selectbackground: green;
+            --selectcolor: beige;
+            --flagbackground: beige;
+            /* --notselectabledisplay: none; */
+            --notselectablebackground: none;
+            --notselectablecolor: black;
+            --notselectableopacity: .1;
         }
     </style>
     <style>
