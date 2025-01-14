@@ -119,10 +119,21 @@
         <p>UI and SVG Flags dependencies only load <b>AFTER</b> click, only when required, once!
             <br>
             This LOAD delay is measured in the console. Is it an acceptable UI delay?
+            <br>
+            I think download time is acceptable on a 4G connection.
         </p>
+        <h4>GZip filesizes</h4>
+        <ul>
+            <li><b>2.7 kB</b> select-button.min.js</li>
+            <li>Loaded after click:</li>
+            <ul>
+                <li><b>2.4 kB</b> select-flags.min.js</li>
+                <li><b>30.6 kB</b> elements.flagmeister.min.js - <b>all</b> SVG flags, no extra SVG downloads!</li>
+            </ul>
+        </ul>
         <h2>Use</h2>
         <p>Load
-            with<br><code>&lt;script src="https://language-select.github.io/button.min.js">&lt;/script></code>
+            with<br><code>&lt;script src="https://language-select.github.io/select-button.min.js">&lt;/script></code>
         </p>
         <p>Use:<br>
             <code>&lt;language-select selected="nl" languages="en,nl,es,pt,...">&lt;/language-select></code>
