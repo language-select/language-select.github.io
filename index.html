@@ -9,17 +9,21 @@
 
     <!-- LOADING <language-select> Web Component -->
     <script>
-        const script = document.createElement('script');
-                    script.src = `./select-button${location.href.includes("127") ? "" : ".min"}.js`;
-        document.head.append(script);
+                // longer code, NOT creating any variables in global scope
+                document.head.append(Object.assign(document.createElement('script'), {
+                    src: `./select-button${location.href.includes("127") ? "" : ".min"}.js`
+                }));
     </script>
+
     <script>
+            // example Event listener
         document.addEventListener('language-select', (e) => {
             // console.log(` %c language-select Event`, "background:gold", e.detail);
             // let el = document.querySelector('language-select');
             // console.log(` %c languages on <language-select>`, "background:gold", el.languages);
         });
-        console.error(` %c language-select Event`, "background:gold", "Listen for 'language-select' Event");
+
+            console.log(`%c Event: `, "background:gold", "Listen for 'language-select'");
     </script>
 
     <style>
@@ -70,6 +74,7 @@
     <style>
         /* =========================================== */
         /* STYLE <language-select-flags> Web Component */
+        /* displayed after click on button             */
         /* =========================================== */
         language-select-flags {
             /*  default colors when not set: */
@@ -128,7 +133,8 @@
             <li>Dependencies loaded after click:</li>
             <ul>
                 <li><b>2.4 kB</b> select-flags.min.js</li>
-                <li><b>30.6 kB</b> elements.flagmeister.min.js - creates <b>all</b> SVG flags, no extra SVG downloads!</li>
+                <li><b>30.6 kB</b> elements.flagmeister.min.js - creates <b>all</b> SVG flags, no extra SVG downloads!
+                </li>
             </ul>
         </ul>
         <h2>Use</h2>
