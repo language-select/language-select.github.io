@@ -9,10 +9,10 @@
 
     <!-- LOADING <language-select> Web Component -->
     <script>
-                // longer code, NOT creating any variables in global scope
-                document.head.append(Object.assign(document.createElement('script'), {
-                    src: `./select-button${location.href.includes("127") ? "" : ".min"}.js`
-                }));
+            // longer code, NOT creating any variables in global scope
+            document.head.append(Object.assign(document.createElement('script'), {
+                src: `./select-button${location.href.includes("127") ? "" : ".min"}.js`
+            }));
     </script>
 
     <script>
@@ -23,7 +23,7 @@
             // console.log(` %c languages on <language-select>`, "background:gold", el.languages);
         });
 
-            console.log(`%c Event: `, "background:gold", "Listen for 'language-select'");
+            console.log(`%c Event: `, "background:gold;color:black", "Listen for 'language-select'");
     </script>
 
     <style>
