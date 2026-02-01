@@ -15,8 +15,8 @@
     <meta http-equiv="pragma" content="no-cache" />
     <link rel="icon" type="image/svg+xml"
         href="data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 64 64'><rect width='64' height='64' rx='12' fill='gold'/><text x='50%' y='50%' text-anchor='middle' dominant-baseline='central' font-size='48' fill='black' font-family='Arial'>LS</text></svg>">
-    
-    <!-- LOADING <language-select> Web Component on localhost OR GitHub pages -->
+
+    <!-- LOADING <select-button> Web Component on localhost OR GitHub pages -->
     <script>
             // longer code, NOT creating any variables in global scope
             document.head.append(Object.assign(document.createElement('script'), {
@@ -48,7 +48,7 @@
             background: whitesmoke;
 
             /* style labeled parts inside shadowDOM */
-            &::part(div) {
+            &::part(language-selector) {
                 /* background: pink */
             }
 
