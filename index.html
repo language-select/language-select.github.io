@@ -7,23 +7,30 @@
     <title>Language Selector</title>
     <meta name="description" content="A web component for selecting languages">
 
-    <!-- LOADING <language-select> Web Component -->
+    <meta name="robots" content="noindex, noimageindex, nofollow, nosnippet" />
+    <meta http-equiv="cache-control" content="max-age=0" />
+    <meta http-equiv="Cache-Control" content="no-cache, no-store, must-revalidate">
+    <meta http-equiv="expires" content="0" />
+    <meta http-equiv="expires" content="Tue, 01 Jan 1980 1:00:00 GMT" />
+    <meta http-equiv="pragma" content="no-cache" />
+    <link rel="icon" type="image/svg+xml"
+        href="data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 64 64'><rect width='64' height='64' rx='12' fill='gold'/><text x='50%' y='50%' text-anchor='middle' dominant-baseline='central' font-size='48' fill='black' font-family='Arial'>LS</text></svg>">
+    
+    <!-- LOADING <language-select> Web Component on localhost OR GitHub pages -->
     <script>
             // longer code, NOT creating any variables in global scope
             document.head.append(Object.assign(document.createElement('script'), {
                 src: `./select-button${location.href.includes("127") ? "" : ".min"}.js`
             }));
-    </script>
 
-    <script>
             // example Event listener
+                console.log(`%c Event: `, "background:gold;color:black", "Listen for 'language-select'");
         document.addEventListener('language-select', (e) => {
-            // console.log(` %c language-select Event`, "background:gold", e.detail);
-            // let el = document.querySelector('language-select');
-            // console.log(` %c languages on <language-select>`, "background:gold", el.languages);
+            // console.log(` %c language-select Event `, "background:gold;color:black", e.detail);
+            let el = document.querySelector('language-select');
+            console.log(` %c languages on <language-select> `, "background:gold;color:black", el.languages);
         });
 
-            console.log(`%c Event: `, "background:gold;color:black", "Listen for 'language-select'");
     </script>
 
     <style>
@@ -121,9 +128,11 @@
         <h1>&lt;language-select> - Proof of Concept</h1>
         <p>For usage and styling see Page Source</p>
         <p>The Web Component displays a button with language-name text to label</b></p>
-        <p>UI and SVG Flags dependencies load <b>AFTER</b> click, only when required, once!
+        <p>UI and SVG Flag dependencies load <b>AFTER</b> click, only when required, once!
             <br>
             This LOAD delay is measured in the console. Is it an acceptable UI delay?
+            <br>
+            The animations "hide"
             <br>
             I think download time is acceptable on a 4G connection.
         </p>
@@ -147,6 +156,8 @@
         <p>Language codes are ISO-Alpha3 country codes</p>
         <p>Style with ::part (see Page Source)</p>
         <p>Language selection sends a <b>"language-select"</b> Event up the DOM tree (see console)</p>
+        <h2>F12 Dev tools</h2>
+        <p>Tip set a <b>-svg</b> filter in the Network Tab to not see the SVG images</p>
     </section>
 </body>
 
